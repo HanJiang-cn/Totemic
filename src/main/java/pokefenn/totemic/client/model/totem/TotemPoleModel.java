@@ -38,8 +38,8 @@ public final class TotemPoleModel implements IUnbakedGeometry<TotemPoleModel> {
 
     @Override
     public BakedModel bake(IGeometryBakingContext ctx, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
-        var bakedModels = Maps.transformValues(totemModels, unbaked -> unbaked.bake(bakery, spriteGetter, modelState, modelLocation));
-        return new BakedTotemPoleModel(Map.copyOf(bakedModels));
+        var bakedModels = Map.copyOf(Maps.transformValues(totemModels, unbaked -> unbaked.bake(bakery, spriteGetter, modelState, modelLocation)));
+        return new BakedTotemPoleModel(bakedModels);
     }
 
     @Override
