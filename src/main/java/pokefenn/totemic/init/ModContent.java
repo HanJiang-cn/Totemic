@@ -84,18 +84,18 @@ public final class ModContent {
     //13200: Flute + Drum + Rattle + Eagle-Bone Whistle
     //14700: Flute + Drum + Rattle + Eagle-Bone Whistle + Jingle Dress
     //16200: Flute + Drum + Rattle + Eagle-Bone Whistle + Jingle Dress + full Wind Chime
-    public static final RegistryObject<Ceremony> war_dance = CEREMONIES.register("war_dance", () -> new Ceremony(4500, 20 * 20, () -> WarDanceCeremony.INSTANCE, drum.get(), drum.get()));
-    public static final RegistryObject<Ceremony> depths = CEREMONIES.register("depths", () -> new Ceremony(4500, 20 * 20, () -> DepthsCeremony.INSTANCE, flute.get(), flute.get()));
-    public static final RegistryObject<Ceremony> fertility = CEREMONIES.register("fertility", () -> new Ceremony(5280, 23 * 20, () -> FertilityCeremony.INSTANCE, flute.get(), drum.get()));
-    public static final RegistryObject<Ceremony> zaphkiel_waltz = CEREMONIES.register("zaphkiel_waltz", () -> new Ceremony(6720, 20 * 20, () -> ZaphkielWaltzCeremony.INSTANCE, wind_chime.get(), flute.get()));
-    public static final RegistryObject<Ceremony> animal_growth = CEREMONIES.register("animal_growth", () -> new Ceremony(6900, 21 * 20, () -> AnimalGrowthCeremony.INSTANCE, flute.get(), wind_chime.get()));
-    public static final RegistryObject<Ceremony> buffalo_dance = CEREMONIES.register("buffalo_dance", () -> new Ceremony(7380, 24 * 20, () -> BuffaloDanceCeremony.INSTANCE, drum.get(), wind_chime.get()));
-    public static final RegistryObject<Ceremony> rain = CEREMONIES.register("rain", () -> new Ceremony(10980, 26 * 20, () -> WeatherCeremony.RAIN, drum.get(), rattle.get()));
-    public static final RegistryObject<Ceremony> drought = CEREMONIES.register("drought", () -> new Ceremony(10980, 26 * 20, () -> WeatherCeremony.DROUGHT, rattle.get(), drum.get()));
-    public static final RegistryObject<Ceremony> flute_infusion = CEREMONIES.register("flute_infusion", () -> new Ceremony(11340, 28 * 20, () -> FluteInfusionCeremony.INSTANCE, flute.get(), rattle.get()));
-    public static final RegistryObject<Ceremony> eagle_dance = CEREMONIES.register("eagle_dance", () -> new Ceremony(11580, 25 * 20, () -> EagleDanceCeremony.INSTANCE, rattle.get(), wind_chime.get()));
-    public static final RegistryObject<Ceremony> cleansing = CEREMONIES.register("cleansing", () -> new Ceremony(14700, 30 * 20, () -> CleansingCeremony.INSTANCE, eagle_bone_whistle.get(), flute.get()));
-    public static final RegistryObject<Ceremony> sun_dance = CEREMONIES.register("sun_dance", () -> new Ceremony(14820, 31 * 20, () -> SunDanceCeremony.INSTANCE, drum.get(), eagle_bone_whistle.get()));
-    public static final RegistryObject<Ceremony> danse_macabre = CEREMONIES.register("danse_macabre", () -> new Ceremony(14940, 32 * 20, () -> DanseMacabreCeremony.INSTANCE, eagle_bone_whistle.get(), wind_chime.get()));
-    public static final RegistryObject<Ceremony> baykok_summon = CEREMONIES.register("baykok_summon", () -> new Ceremony(15060, 32 * 20, () -> BaykokSummonCeremony.INSTANCE, wind_chime.get(), eagle_bone_whistle.get()));
+    public static final RegistryObject<Ceremony> war_dance = CEREMONIES.register("war_dance", () -> new Ceremony(4500, 20 * 20, () -> WarDanceCeremony.INSTANCE, drum, drum));
+    public static final RegistryObject<Ceremony> depths = CEREMONIES.register("depths", () -> new Ceremony(4500, 20 * 20, () -> DepthsCeremony.INSTANCE, flute, flute));
+    public static final RegistryObject<Ceremony> fertility = CEREMONIES.register("fertility", () -> new Ceremony(5280, 23 * 20, () -> FertilityCeremony.INSTANCE, flute, drum));
+    public static final RegistryObject<Ceremony> zaphkiel_waltz = CEREMONIES.register("zaphkiel_waltz", () -> new Ceremony(6720, 20 * 20, () -> ZaphkielWaltzCeremony.INSTANCE, wind_chime, flute));
+    public static final RegistryObject<Ceremony> animal_growth = CEREMONIES.register("animal_growth", () -> new Ceremony(6900, 21 * 20, () -> AnimalGrowthCeremony.INSTANCE, flute, wind_chime));
+    public static final RegistryObject<Ceremony> buffalo_dance = CEREMONIES.register("buffalo_dance", () -> new Ceremony(7380, 24 * 20, () -> BuffaloDanceCeremony.INSTANCE, drum, wind_chime));
+    public static final RegistryObject<Ceremony> rain = CEREMONIES.register("rain", () -> new Ceremony(10980, 26 * 20, () -> WeatherCeremony.RAIN, drum, rattle));
+    public static final RegistryObject<Ceremony> drought = CEREMONIES.register("drought", () -> new Ceremony(10980, 26 * 20, () -> WeatherCeremony.DROUGHT, rattle, drum));
+    public static final RegistryObject<Ceremony> flute_infusion = CEREMONIES.register("flute_infusion", () -> new Ceremony(11340, 28 * 20, () -> FluteInfusionCeremony.INSTANCE, flute, rattle));
+    public static final RegistryObject<Ceremony> eagle_dance = CEREMONIES.register("eagle_dance", () -> new Ceremony(11580, 25 * 20, () -> EagleDanceCeremony.INSTANCE, rattle, wind_chime));
+    public static final RegistryObject<Ceremony> cleansing = CEREMONIES.register("cleansing", () -> new Ceremony(14700, 30 * 20, () -> CleansingCeremony.INSTANCE, eagle_bone_whistle, flute));
+    public static final RegistryObject<Ceremony> sun_dance = CEREMONIES.register("sun_dance", () -> new Ceremony(14820, 31 * 20, () -> SunDanceCeremony.INSTANCE, drum, eagle_bone_whistle));
+    public static final RegistryObject<Ceremony> danse_macabre = CEREMONIES.register("danse_macabre", () -> new Ceremony(14940, 32 * 20, () -> DanseMacabreCeremony.INSTANCE, eagle_bone_whistle, wind_chime));
+    public static final RegistryObject<Ceremony> baykok_summon = CEREMONIES.register("baykok_summon", () -> new Ceremony(15060, 32 * 20, () -> BaykokSummonCeremony.INSTANCE, wind_chime, eagle_bone_whistle));
 }
