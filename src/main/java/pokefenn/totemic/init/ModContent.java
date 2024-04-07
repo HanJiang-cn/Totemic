@@ -1,5 +1,7 @@
 package pokefenn.totemic.init;
 
+import java.util.List;
+
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.material.MaterialColor;
@@ -50,7 +52,7 @@ public final class ModContent {
     public static final RegistryObject<TotemWoodType> cedar = WOOD_TYPES.register("cedar", () -> new TotemWoodType(MaterialColor.COLOR_PINK, MaterialColor.COLOR_ORANGE, TotemicBlockTags.CEDAR_LOGS));
 
     public static final DeferredRegister<TotemCarving> CARVINGS = DeferredRegister.create(RegistryAPI.TOTEM_CARVING_REGISTRY, TotemicAPI.MOD_ID);
-    public static final RegistryObject<PortableTotemCarving> none = CARVINGS.register("none", () -> new PortableTotemCarving());
+    public static final RegistryObject<PortableTotemCarving> none = CARVINGS.register("none", () -> new PortableTotemCarving(List.of()));
     public static final RegistryObject<PortableTotemCarving> bat = CARVINGS.register("bat", () -> new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.SLOW_FALLING)));
     public static final RegistryObject<PortableTotemCarving> blaze = CARVINGS.register("blaze", () -> new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.FIRE_RESISTANCE)));
     public static final RegistryObject<PortableTotemCarving> buffalo = CARVINGS.register("buffalo", () -> new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.DIG_SPEED)));
