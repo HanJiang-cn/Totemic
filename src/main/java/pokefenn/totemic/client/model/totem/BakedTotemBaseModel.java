@@ -35,7 +35,7 @@ public final class BakedTotemBaseModel extends BakedModelWrapper<BakedModel> {
     private final ItemOverrides itemOverrides;
 
     BakedTotemBaseModel(Map<TotemWoodType, BakedModel> bakedTotemModels) {
-        super(Objects.requireNonNull(bakedTotemModels.get(ModContent.oak))); //default model
+        super(Objects.requireNonNull(bakedTotemModels.get(ModContent.oak.get()))); //default model
         this.bakedTotemModels = bakedTotemModels;
         this.itemOverrides = new ItemOverrides() {
             @Override
@@ -46,7 +46,7 @@ public final class BakedTotemBaseModel extends BakedModelWrapper<BakedModel> {
     }
 
     private BakedModel getModelFor(ModelData modelData) {
-        var woodType = Objects.requireNonNullElse(modelData.get(WOOD_TYPE_PROPERTY), ModContent.oak);
+        var woodType = Objects.requireNonNullElse(modelData.get(WOOD_TYPE_PROPERTY), ModContent.oak.get());
         return bakedTotemModels.get(woodType);
     }
 

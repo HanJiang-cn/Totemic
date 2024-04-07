@@ -59,7 +59,7 @@ public class TotemKnifeItem extends Item {
         var locTotemList = totemList; //avoid reading the field multiple times
         if(locTotemList == null) {
             totemList = locTotemList = TotemicAPI.get().registry().totemCarvings().getValues().stream()
-                    .filter(e -> e != ModContent.none)
+                    .filter(e -> e != ModContent.none.get())
                     .map(e -> e.getRegistryName().toString())
                     .toList(); //creates an immutable list, hence thread safe
         }
@@ -125,7 +125,7 @@ public class TotemKnifeItem extends Item {
                 .findAny()
                 .or(() -> { //Fall back to oak if it is an unrecognized log type
                     if(state.is(BlockTags.LOGS_THAT_BURN))
-                        return Optional.of(ModContent.oak);
+                        return Optional.of(ModContent.oak.get());
                     else
                         return Optional.empty();
                 });

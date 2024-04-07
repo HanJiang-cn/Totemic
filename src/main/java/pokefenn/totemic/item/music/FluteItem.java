@@ -27,9 +27,9 @@ public class FluteItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if(player.isShiftKeyDown())
-            TotemicAPI.get().music().playSelector(player, ModContent.flute);
+            TotemicAPI.get().music().playSelector(player, ModContent.flute.get());
         else
-            TotemicAPI.get().music().playMusic(level, player.position(), player, ModContent.flute, MusicAPI.DEFAULT_RANGE, getMusicAmount(level.random));
+            TotemicAPI.get().music().playMusic(level, player.position(), player, ModContent.flute.get(), MusicAPI.DEFAULT_RANGE, getMusicAmount(level.random));
 
         player.getCooldowns().addCooldown(ModItems.flute.get(), 20);
         player.getCooldowns().addCooldown(ModItems.infused_flute.get(), 20);
@@ -39,7 +39,7 @@ public class FluteItem extends Item {
     }
 
     protected int getMusicAmount(RandomSource rand) {
-        return ModContent.flute.getBaseOutput();
+        return ModContent.flute.get().getBaseOutput();
     }
 
     @Override

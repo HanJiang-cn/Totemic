@@ -82,7 +82,7 @@ public class JingleDressItem extends ArmorItem {
 
                 cc.charge += Mth.clamp((int)(velocity * chargeFactor), 0, maxSingleCharge);
                 if(cc.charge >= chargeLimit) {
-                    TotemicAPI.get().music().playMusic(player, ModContent.jingle_dress);
+                    TotemicAPI.get().music().playMusic(player, ModContent.jingle_dress.get());
                     cc.charge %= chargeLimit;
                 }
             });
