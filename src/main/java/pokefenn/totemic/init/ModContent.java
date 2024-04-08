@@ -53,25 +53,25 @@ public final class ModContent {
 
     public static final DeferredRegister<TotemCarving> CARVINGS = DeferredRegister.create(RegistryAPI.TOTEM_CARVING_REGISTRY, TotemicAPI.MOD_ID);
     public static final RegistryObject<PortableTotemCarving> none = CARVINGS.register("none", () -> new PortableTotemCarving(List.of()));
-    public static final RegistryObject<PortableTotemCarving> bat = CARVINGS.register("bat", () -> new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.SLOW_FALLING)));
-    public static final RegistryObject<PortableTotemCarving> blaze = CARVINGS.register("blaze", () -> new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.FIRE_RESISTANCE)));
-    public static final RegistryObject<PortableTotemCarving> buffalo = CARVINGS.register("buffalo", () -> new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.DIG_SPEED)));
+    public static final RegistryObject<PortableTotemCarving> bat = CARVINGS.register("bat", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.SLOW_FALLING)));
+    public static final RegistryObject<PortableTotemCarving> blaze = CARVINGS.register("blaze", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.FIRE_RESISTANCE)));
+    public static final RegistryObject<PortableTotemCarving> buffalo = CARVINGS.register("buffalo", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.DIG_SPEED)));
     public static final RegistryObject<PortableTotemCarving> cow = CARVINGS.register("cow", () -> new PortableTotemCarving(
-            new PotionTotemEffect(() -> MobEffects.DAMAGE_RESISTANCE),
-            new PotionTotemEffect(() -> MobEffects.MOVEMENT_SLOWDOWN, false)));
-    public static final RegistryObject<PortableTotemCarving> enderman = CARVINGS.register("enderman", () -> new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.NIGHT_VISION, false) {
+            new PotionTotemEffect(MobEffects.DAMAGE_RESISTANCE),
+            new PotionTotemEffect(MobEffects.MOVEMENT_SLOWDOWN, false)));
+    public static final RegistryObject<PortableTotemCarving> enderman = CARVINGS.register("enderman", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.NIGHT_VISION, false) {
         @Override
         protected int getLingeringTime() { return 210; }
     }));
-    public static final RegistryObject<PortableTotemCarving> horse = CARVINGS.register("horse", () -> new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.MOVEMENT_SPEED)));
+    public static final RegistryObject<PortableTotemCarving> horse = CARVINGS.register("horse", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.MOVEMENT_SPEED)));
     public static final RegistryObject<TotemCarving> ocelot = CARVINGS.register("ocelot", () -> new TotemCarving(
             new OcelotTotemEffect(),
-            new PotionTotemEffect(ModMobEffects.ocelot, false)));
-    public static final RegistryObject<PortableTotemCarving> pig = CARVINGS.register("pig", () -> new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.LUCK)));
-    public static final RegistryObject<PortableTotemCarving> rabbit = CARVINGS.register("rabbit", () -> new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.JUMP)));
-    public static final RegistryObject<PortableTotemCarving> spider = CARVINGS.register("spider", () -> new PortableTotemCarving(new PotionTotemEffect(ModMobEffects.spider)));
-    public static final RegistryObject<PortableTotemCarving> squid = CARVINGS.register("squid", () -> new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.WATER_BREATHING)));
-    public static final RegistryObject<PortableTotemCarving> wolf = CARVINGS.register("wolf", () -> new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.DAMAGE_BOOST)));
+            new PotionTotemEffect(ModMobEffects.ocelot.get(), false)));
+    public static final RegistryObject<PortableTotemCarving> pig = CARVINGS.register("pig", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.LUCK)));
+    public static final RegistryObject<PortableTotemCarving> rabbit = CARVINGS.register("rabbit", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.JUMP)));
+    public static final RegistryObject<PortableTotemCarving> spider = CARVINGS.register("spider", () -> new PortableTotemCarving(new PotionTotemEffect(ModMobEffects.spider.get())));
+    public static final RegistryObject<PortableTotemCarving> squid = CARVINGS.register("squid", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.WATER_BREATHING)));
+    public static final RegistryObject<PortableTotemCarving> wolf = CARVINGS.register("wolf", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.DAMAGE_BOOST)));
 
     public static final DeferredRegister<Ceremony> CEREMONIES = DeferredRegister.create(RegistryAPI.CEREMONY_REGISTRY, TotemicAPI.MOD_ID);
     //Music amount landmarks:
