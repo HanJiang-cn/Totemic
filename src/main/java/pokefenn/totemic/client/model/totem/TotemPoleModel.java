@@ -44,7 +44,7 @@ public final class TotemPoleModel implements IUnbakedGeometry<TotemPoleModel> {
             final var woodTypeRegistry = TotemicAPI.get().registry().woodTypes();
             final var carvingRegistry = TotemicAPI.get().registry().totemCarvings();
 
-            totemModels = Maps.newHashMapWithExpectedSize(woodTypeRegistry.getValues().size() * carvingRegistry.getValues().size());
+            totemModels = Maps.newHashMapWithExpectedSize(woodTypeRegistry.size() * carvingRegistry.size());
             for(var woodType: woodTypeRegistry) {
                 var woodTypeModel = (BlockModel) modelGetter.apply(getWoodTypeModelName(woodType));
                 if(woodTypeModel.getParentLocation() != null)

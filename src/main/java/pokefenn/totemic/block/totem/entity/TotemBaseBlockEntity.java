@@ -155,7 +155,7 @@ public class TotemBaseBlockEntity extends BlockEntity {
         var optWood = TotemicAPI.get().registry().woodTypes().getOptional(ResourceLocation.tryParse(tag.getString("Wood")));
         if(optWood.isEmpty())
             Totemic.logger.error("Unknown Totem Wood Type: '{}'", tag.getString("Wood"));
-        woodType = optWood.orElse(ModContent.oak);
+        woodType = optWood.orElseGet(ModContent.oak);
 
         if(tag.contains("State", Tag.TAG_ANY_NUMERIC)) {
             byte id = tag.getByte("State");
