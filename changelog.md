@@ -1,6 +1,3 @@
-- Added Red Cedar Hanging Sign
-- Added missing crafting recipes for Red Cedar Wood and Stripped Red Cedar Wood (aka bark blocks)
-- Now requires at least NeoForge version 20.4.167 (stable release)
-- Missing texture entries for a Totem Pole wood type in a resource pack will now cause its Totem Poles to have missing textures rather than Red Cedar textures
-- Added missing block names for Dummy Tipi and Potted Red Cedar Sapling
-- Internal changes to how the Jingle Dress works. The behavior should be unchanged.
+With this patch, the Totempedia can be used again when Patchouli is installed, which is available as of recently for NeoForge on 1.20.4.
+
+- Fixed loading error with Patchouli when trying to open the Totempedia
