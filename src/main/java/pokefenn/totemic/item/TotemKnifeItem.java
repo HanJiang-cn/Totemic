@@ -56,27 +56,28 @@ public class TotemKnifeItem extends Item {
     private static List<String> totemList; //Lazily created
 
     public static ItemStack changeIndex(ItemStack itemStack, boolean direction) {
-        if(totemList == null) {
-            totemList = TotemicAPI.get().registry().totemCarvings().getValues().stream()
-                    .filter(e -> e != ModContent.none)
+        var locTotemList = totemList; //avoid reading the field multiple times
+        if(locTotemList == null) {
+            totemList = locTotemList = TotemicAPI.get().registry().totemCarvings().getValues().stream()
+                    .filter(e -> e != ModContent.none.get())
                     .map(e -> e.getRegistryName().toString())
-                    .toList();
+                    .toList(); //creates an immutable list, hence thread safe
         }
 
         ItemStack stack = itemStack.copy();
         String key = stack.getOrCreateTag().getString(KNIFE_CARVING_KEY);
-        int index = key.isEmpty() ? -1 : totemList.indexOf(key);
+        int index = key.isEmpty() ? -1 : locTotemList.indexOf(key);
 
         if(index == -1) {
-            index = direction ? 0 : totemList.size() - 1;
+            index = direction ? 0 : locTotemList.size() - 1;
         }
         else {
             index += direction ? 1 : -1;
-            if(index >= totemList.size())
+            if(index >= locTotemList.size())
                 index = -1;
         }
 
-        String name = (index == -1) ? "" : totemList.get(index);
+        String name = (index == -1) ? "" : locTotemList.get(index);
         stack.getTag().putString(KNIFE_CARVING_KEY, name);
         return stack;
     }
@@ -124,7 +125,7 @@ public class TotemKnifeItem extends Item {
                 .findAny()
                 .or(() -> { //Fall back to oak if it is an unrecognized log type
                     if(state.is(BlockTags.LOGS_THAT_BURN))
-                        return Optional.of(ModContent.oak);
+                        return Optional.of(ModContent.oak.get());
                     else
                         return Optional.empty();
                 });

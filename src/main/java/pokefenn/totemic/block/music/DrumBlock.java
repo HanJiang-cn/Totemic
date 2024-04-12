@@ -55,11 +55,11 @@ public class DrumBlock extends Block implements SimpleWaterloggedBlock {
         if(!state.getValue(PLAYED)) {
             if(!player.isShiftKeyDown()) {
                 putOnCooldown(state, level, pos);
-                TotemicAPI.get().music().playMusic(level, pos, player, ModContent.drum);
+                TotemicAPI.get().music().playMusic(level, pos, player, ModContent.drum.get());
             }
             else {
                 putOnCooldown(state, level, pos);
-                TotemicAPI.get().music().playSelector(level, pos, player, ModContent.drum);
+                TotemicAPI.get().music().playSelector(level, pos, player, ModContent.drum.get());
             }
         }
     }

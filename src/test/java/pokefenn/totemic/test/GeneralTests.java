@@ -68,7 +68,7 @@ public final class GeneralTests {
         h.succeed();
     }
 
-    @GameTest(template = "general/cedar_flower_pot")
+    @GameTest(batch = "totemic.general", template = "general/cedar_flower_pot")
     public static void testCedarFlowerPot(GameTestHelper h) {
         final BlockPos pos = new BlockPos(0, 1, 0);
         var apos = h.absolutePos(pos);

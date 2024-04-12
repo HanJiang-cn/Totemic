@@ -45,7 +45,7 @@ public class InfusedFluteItem extends FluteItem {
 
     @Override
     protected int getMusicAmount(RandomSource rand) {
-        return ModContent.flute.getBaseOutput() + rand.nextInt(120);
+        return ModContent.flute.get().getBaseOutput() + rand.nextInt(120);
     }
 
     private void temptEntities(Level level, Vec3 pos) {

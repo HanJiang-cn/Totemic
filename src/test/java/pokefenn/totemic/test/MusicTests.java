@@ -21,8 +21,8 @@ public final class MusicTests {
         var totem = (TotemBaseBlockEntity) h.getBlockEntity(totemPos);
 
         assertTotemMusic(h, totem, 0);
-        TotemicAPI.get().music().playMusic(h.getLevel(), h.absolutePos(playPos), null, ModContent.flute);
-        assertTotemMusic(h, totem, ModContent.flute.getBaseOutput());
+        TotemicAPI.get().music().playMusic(h.getLevel(), h.absolutePos(playPos), null, ModContent.flute.get());
+        assertTotemMusic(h, totem, ModContent.flute.get().getBaseOutput());
         h.succeed();
     }
 
