@@ -24,9 +24,9 @@ public class EagleBoneWhistleItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if(player.isShiftKeyDown())
-            TotemicAPI.get().music().playSelector(player, ModContent.eagle_bone_whistle);
+            TotemicAPI.get().music().playSelector(player, ModContent.eagle_bone_whistle.get());
         else
-            TotemicAPI.get().music().playMusic(player, ModContent.eagle_bone_whistle);
+            TotemicAPI.get().music().playMusic(player, ModContent.eagle_bone_whistle.get());
 
         player.getCooldowns().addCooldown(this, 20);
         player.awardStat(Stats.ITEM_USED.get(this));

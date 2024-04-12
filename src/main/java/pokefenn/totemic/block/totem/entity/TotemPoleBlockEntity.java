@@ -20,12 +20,14 @@ import pokefenn.totemic.api.TotemicAPI;
 import pokefenn.totemic.api.totem.TotemCarving;
 import pokefenn.totemic.api.totem.TotemWoodType;
 import pokefenn.totemic.client.model.totem.BakedTotemPoleModel;
+import pokefenn.totemic.client.model.totem.TotemPoleModelData;
 import pokefenn.totemic.init.ModBlockEntities;
 import pokefenn.totemic.init.ModContent;
 
 public class TotemPoleBlockEntity extends BlockEntity {
-    private TotemWoodType woodType = ModContent.oak;
-    private TotemCarving carving = ModContent.none;
+    //Fields need to be volatile since getModelData() is called from chunk render threads
+    private volatile TotemWoodType woodType = ModContent.oak.get();
+    private volatile TotemCarving carving = ModContent.none.get();
 
     public TotemPoleBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.totem_pole.get(), pPos, pBlockState);
@@ -79,6 +81,6 @@ public class TotemPoleBlockEntity extends BlockEntity {
 
     @Override
     public @NotNull ModelData getModelData() {
-        return ModelData.builder().with(BakedTotemPoleModel.DATA_PROPERTY, new BakedTotemPoleModel.Data(woodType, carving)).build();
+        return ModelData.builder().with(BakedTotemPoleModel.DATA_PROPERTY, new TotemPoleModelData(woodType, carving)).build();
     }
 }

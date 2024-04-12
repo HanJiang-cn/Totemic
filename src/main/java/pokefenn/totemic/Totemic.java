@@ -53,11 +53,14 @@ public final class Totemic {
         ModBlockEntities.REGISTER.register(modBus);
         ModEntityTypes.REGISTER.register(modBus);
         ModSounds.REGISTER.register(modBus);
+        ModContent.INSTRUMENTS.register(modBus);
+        ModContent.WOOD_TYPES.register(modBus);
+        ModContent.CARVINGS.register(modBus);
+        ModContent.CEREMONIES.register(modBus);
 
         modBus.register(ModItems.class);
         modBus.register(ModEntityTypes.class);
         modBus.register(RegistryApiImpl.class);
-        modBus.register(ModContent.class);
 
         modBus.addListener(TotemBaseBlockEntity::registerCapability);
         modBus.addListener(ModCriteriaTriggers::init);

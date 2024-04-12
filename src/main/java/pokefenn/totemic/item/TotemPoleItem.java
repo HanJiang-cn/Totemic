@@ -27,11 +27,11 @@ public class TotemPoleItem extends BlockItem {
                 .filter(str -> !str.isEmpty())
                 .map(ResourceLocation::tryParse)
                 .map(woodTypeRegistry::get)
-                .orElse(ModContent.oak);
+                .orElse(ModContent.oak.get());
     }
 
     public static TotemCarving getCarving(ItemStack stack) {
-        return TotemKnifeItem.getCarving(stack).orElse(ModContent.none);
+        return TotemKnifeItem.getCarving(stack).orElse(ModContent.none.get());
     }
 
     @Override

@@ -1,10 +1,12 @@
 package pokefenn.totemic.init;
 
+import java.util.List;
+
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.registries.RegisterEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import pokefenn.totemic.api.TotemicAPI;
 import pokefenn.totemic.api.TotemicBlockTags;
 import pokefenn.totemic.api.ceremony.Ceremony;
 import pokefenn.totemic.api.music.MusicInstrument;
@@ -29,45 +31,49 @@ import pokefenn.totemic.ceremony.ZaphkielWaltzCeremony;
 import pokefenn.totemic.totem.OcelotTotemEffect;
 
 public final class ModContent {
-    public static final MusicInstrument flute = new MusicInstrument(180, 3000);
-    public static final MusicInstrument drum = new MusicInstrument(240, 3300);
-    public static final MusicInstrument wind_chime = new MusicInstrument(120, 1500);
-    public static final MusicInstrument jingle_dress = new MusicInstrument(180, 1500);
-    public static final MusicInstrument rattle = new MusicInstrument(300, 3300);
-    public static final MusicInstrument eagle_bone_whistle = new MusicInstrument(360, 3600);
-//    public static final MusicInstrument nether_pipe = new MusicInstrument(240, 3900);
+    public static final DeferredRegister<MusicInstrument> INSTRUMENTS = DeferredRegister.create(RegistryAPI.MUSIC_INSTRUMENT_REGISTRY, TotemicAPI.MOD_ID);
+    public static final RegistryObject<MusicInstrument> flute = INSTRUMENTS.register("flute", () -> new MusicInstrument(180, 3000).setItem(ModItems.flute.get()).setSound(ModSounds.flute));
+    public static final RegistryObject<MusicInstrument> drum = INSTRUMENTS.register("drum", () -> new MusicInstrument(240, 3300).setItem(ModBlocks.drum.get()).setSound(ModSounds.drum));
+    public static final RegistryObject<MusicInstrument> wind_chime = INSTRUMENTS.register("wind_chime", () -> new MusicInstrument(120, 1500).setItem(ModBlocks.wind_chime.get()).setSound(ModSounds.wind_chime));
+    public static final RegistryObject<MusicInstrument> jingle_dress = INSTRUMENTS.register("jingle_dress", () -> new MusicInstrument(180, 1500).setItem(ModItems.jingle_dress.get()));
+    public static final RegistryObject<MusicInstrument> rattle = INSTRUMENTS.register("rattle", () -> new MusicInstrument(300, 3300).setItem(ModItems.rattle.get()).setSound(ModSounds.rattle));
+    public static final RegistryObject<MusicInstrument> eagle_bone_whistle = INSTRUMENTS.register("eagle_bone_whistle", () -> new MusicInstrument(360, 3600).setItem(ModItems.eagle_bone_whistle.get()).setSound(ModSounds.eagle_bone_whistle));
+//    public static final RegistryObject<MusicInstrument> nether_pipe = INSTRUMENTS.register("nether_pipe", () -> new MusicInstrument(240, 3900));
 
-    public static final TotemWoodType oak = new TotemWoodType(MapColor.WOOD, MapColor.PODZOL, BlockTags.OAK_LOGS);
-    public static final TotemWoodType spruce = new TotemWoodType(MapColor.PODZOL, MapColor.COLOR_BROWN, BlockTags.SPRUCE_LOGS);
-    public static final TotemWoodType birch = new TotemWoodType(MapColor.SAND, MapColor.QUARTZ, BlockTags.BIRCH_LOGS);
-    public static final TotemWoodType jungle = new TotemWoodType(MapColor.DIRT, MapColor.PODZOL, BlockTags.JUNGLE_LOGS);
-    public static final TotemWoodType acacia = new TotemWoodType(MapColor.COLOR_ORANGE, MapColor.STONE, BlockTags.ACACIA_LOGS);
-    public static final TotemWoodType cherry = new TotemWoodType(MapColor.TERRACOTTA_WHITE, MapColor.TERRACOTTA_GRAY, BlockTags.CHERRY_LOGS);
-    public static final TotemWoodType dark_oak = new TotemWoodType(MapColor.COLOR_BROWN, MapColor.COLOR_BROWN, BlockTags.DARK_OAK_LOGS);
-    public static final TotemWoodType mangrove = new TotemWoodType(MapColor.COLOR_RED, MapColor.PODZOL, BlockTags.MANGROVE_LOGS);
-    public static final TotemWoodType cedar = new TotemWoodType(MapColor.COLOR_PINK, MapColor.COLOR_ORANGE, TotemicBlockTags.CEDAR_LOGS);
+    public static final DeferredRegister<TotemWoodType> WOOD_TYPES = DeferredRegister.create(RegistryAPI.WOOD_TYPE_REGISTRY, TotemicAPI.MOD_ID);
+    public static final RegistryObject<TotemWoodType> oak = WOOD_TYPES.register("oak", () -> new TotemWoodType(MapColor.WOOD, MapColor.PODZOL, BlockTags.OAK_LOGS));
+    public static final RegistryObject<TotemWoodType> spruce = WOOD_TYPES.register("spruce", () -> new TotemWoodType(MapColor.PODZOL, MapColor.COLOR_BROWN, BlockTags.SPRUCE_LOGS));
+    public static final RegistryObject<TotemWoodType> birch = WOOD_TYPES.register("birch", () -> new TotemWoodType(MapColor.SAND, MapColor.QUARTZ, BlockTags.BIRCH_LOGS));
+    public static final RegistryObject<TotemWoodType> jungle = WOOD_TYPES.register("jungle", () -> new TotemWoodType(MapColor.DIRT, MapColor.PODZOL, BlockTags.JUNGLE_LOGS));
+    public static final RegistryObject<TotemWoodType> acacia = WOOD_TYPES.register("acacia", () -> new TotemWoodType(MapColor.COLOR_ORANGE, MapColor.STONE, BlockTags.ACACIA_LOGS));
+    public static final RegistryObject<TotemWoodType> cherry = WOOD_TYPES.register("cherry", () -> new TotemWoodType(MapColor.TERRACOTTA_WHITE, MapColor.TERRACOTTA_GRAY, BlockTags.CHERRY_LOGS));
+    public static final RegistryObject<TotemWoodType> dark_oak = WOOD_TYPES.register("dark_oak", () -> new TotemWoodType(MapColor.COLOR_BROWN, MapColor.COLOR_BROWN, BlockTags.DARK_OAK_LOGS));
+    public static final RegistryObject<TotemWoodType> mangrove = WOOD_TYPES.register("mangrove", () -> new TotemWoodType(MapColor.COLOR_RED, MapColor.PODZOL, BlockTags.MANGROVE_LOGS));
+    public static final RegistryObject<TotemWoodType> cedar = WOOD_TYPES.register("cedar", () -> new TotemWoodType(MapColor.COLOR_PINK, MapColor.COLOR_ORANGE, TotemicBlockTags.CEDAR_LOGS));
 
-    public static final TotemCarving none = new PortableTotemCarving();
-    public static final TotemCarving bat = new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.SLOW_FALLING));
-    public static final TotemCarving blaze = new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.FIRE_RESISTANCE));
-    public static final TotemCarving buffalo = new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.DIG_SPEED));
-    public static final TotemCarving cow = new PortableTotemCarving(
-            new PotionTotemEffect(() -> MobEffects.DAMAGE_RESISTANCE),
-            new PotionTotemEffect(() -> MobEffects.MOVEMENT_SLOWDOWN, false));
-    public static final TotemCarving enderman = new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.NIGHT_VISION, false) {
+    public static final DeferredRegister<TotemCarving> CARVINGS = DeferredRegister.create(RegistryAPI.TOTEM_CARVING_REGISTRY, TotemicAPI.MOD_ID);
+    public static final RegistryObject<PortableTotemCarving> none = CARVINGS.register("none", () -> new PortableTotemCarving(List.of()));
+    public static final RegistryObject<PortableTotemCarving> bat = CARVINGS.register("bat", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.SLOW_FALLING)));
+    public static final RegistryObject<PortableTotemCarving> blaze = CARVINGS.register("blaze", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.FIRE_RESISTANCE)));
+    public static final RegistryObject<PortableTotemCarving> buffalo = CARVINGS.register("buffalo", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.DIG_SPEED)));
+    public static final RegistryObject<PortableTotemCarving> cow = CARVINGS.register("cow", () -> new PortableTotemCarving(
+            new PotionTotemEffect(MobEffects.DAMAGE_RESISTANCE),
+            new PotionTotemEffect(MobEffects.MOVEMENT_SLOWDOWN, false)));
+    public static final RegistryObject<PortableTotemCarving> enderman = CARVINGS.register("enderman", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.NIGHT_VISION, false) {
         @Override
         protected int getLingeringTime() { return 210; }
-    });
-    public static final TotemCarving horse = new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.MOVEMENT_SPEED));
-    public static final TotemCarving ocelot = new TotemCarving(
+    }));
+    public static final RegistryObject<PortableTotemCarving> horse = CARVINGS.register("horse", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.MOVEMENT_SPEED)));
+    public static final RegistryObject<TotemCarving> ocelot = CARVINGS.register("ocelot", () -> new TotemCarving(
             new OcelotTotemEffect(),
-            new PotionTotemEffect(ModMobEffects.ocelot, false));
-    public static final TotemCarving pig = new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.LUCK));
-    public static final TotemCarving rabbit = new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.JUMP));
-    public static final TotemCarving spider = new PortableTotemCarving(new PotionTotemEffect(ModMobEffects.spider));
-    public static final TotemCarving squid = new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.WATER_BREATHING));
-    public static final TotemCarving wolf = new PortableTotemCarving(new PotionTotemEffect(() -> MobEffects.DAMAGE_BOOST));
+            new PotionTotemEffect(ModMobEffects.ocelot.get(), false)));
+    public static final RegistryObject<PortableTotemCarving> pig = CARVINGS.register("pig", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.LUCK)));
+    public static final RegistryObject<PortableTotemCarving> rabbit = CARVINGS.register("rabbit", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.JUMP)));
+    public static final RegistryObject<PortableTotemCarving> spider = CARVINGS.register("spider", () -> new PortableTotemCarving(new PotionTotemEffect(ModMobEffects.spider.get())));
+    public static final RegistryObject<PortableTotemCarving> squid = CARVINGS.register("squid", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.WATER_BREATHING)));
+    public static final RegistryObject<PortableTotemCarving> wolf = CARVINGS.register("wolf", () -> new PortableTotemCarving(new PotionTotemEffect(MobEffects.DAMAGE_BOOST)));
 
+    public static final DeferredRegister<Ceremony> CEREMONIES = DeferredRegister.create(RegistryAPI.CEREMONY_REGISTRY, TotemicAPI.MOD_ID);
     //Music amount landmarks:
     //6300: Flute + Drum
     //7800: Flute + Drum + full Wind Chime
@@ -78,75 +84,18 @@ public final class ModContent {
     //13200: Flute + Drum + Rattle + Eagle-Bone Whistle
     //14700: Flute + Drum + Rattle + Eagle-Bone Whistle + Jingle Dress
     //16200: Flute + Drum + Rattle + Eagle-Bone Whistle + Jingle Dress + full Wind Chime
-    public static final Ceremony war_dance = new Ceremony(4500, 20 * 20, () -> WarDanceCeremony.INSTANCE, drum, drum);
-    public static final Ceremony depths = new Ceremony(4500, 20 * 20, () -> DepthsCeremony.INSTANCE, flute, flute);
-    public static final Ceremony fertility = new Ceremony(5280, 23 * 20, () -> FertilityCeremony.INSTANCE, flute, drum);
-    public static final Ceremony zaphkiel_waltz = new Ceremony(6720, 20 * 20, () -> ZaphkielWaltzCeremony.INSTANCE, wind_chime, flute);
-    public static final Ceremony animal_growth = new Ceremony(6900, 21 * 20, () -> AnimalGrowthCeremony.INSTANCE, flute, wind_chime);
-    public static final Ceremony buffalo_dance = new Ceremony(7380, 24 * 20, () -> BuffaloDanceCeremony.INSTANCE, drum, wind_chime);
-    public static final Ceremony rain = new Ceremony(10980, 26 * 20, () -> WeatherCeremony.RAIN, drum, rattle);
-    public static final Ceremony drought = new Ceremony(10980, 26 * 20, () -> WeatherCeremony.DROUGHT, rattle, drum);
-    public static final Ceremony flute_infusion = new Ceremony(11340, 28 * 20, () -> FluteInfusionCeremony.INSTANCE, flute, rattle);
-    public static final Ceremony eagle_dance = new Ceremony(11580, 25 * 20, () -> EagleDanceCeremony.INSTANCE, rattle, wind_chime);
-    public static final Ceremony cleansing = new Ceremony(14700, 30 * 20, () -> CleansingCeremony.INSTANCE, eagle_bone_whistle, flute);
-    public static final Ceremony sun_dance = new Ceremony(14820, 31 * 20, () -> SunDanceCeremony.INSTANCE, drum, eagle_bone_whistle);
-    public static final Ceremony danse_macabre = new Ceremony(14940, 32 * 20, () -> DanseMacabreCeremony.INSTANCE, eagle_bone_whistle, wind_chime);
-    public static final Ceremony baykok_summon = new Ceremony(15060, 32 * 20, () -> BaykokSummonCeremony.INSTANCE, wind_chime, eagle_bone_whistle);
-
-    @SubscribeEvent
-    public static void register(RegisterEvent event) {
-        event.register(RegistryAPI.MUSIC_INSTRUMENT_REGISTRY, reg -> {
-            reg.register("flute", flute.setItem(ModItems.flute.get()).setSound(ModSounds.flute));
-            reg.register("drum", drum.setItem(ModBlocks.drum.get()).setSound(ModSounds.drum));
-            reg.register("wind_chime", wind_chime.setItem(ModBlocks.wind_chime.get()).setSound(ModSounds.wind_chime));
-            reg.register("jingle_dress", jingle_dress.setItem(ModItems.jingle_dress.get()));
-            reg.register("rattle", rattle.setItem(ModItems.rattle.get()).setSound(ModSounds.rattle));
-            reg.register("eagle_bone_whistle", eagle_bone_whistle.setItem(ModItems.eagle_bone_whistle.get()).setSound(ModSounds.eagle_bone_whistle));
-        });
-
-        event.register(RegistryAPI.WOOD_TYPE_REGISTRY, reg -> {
-            reg.register("oak", oak);
-            reg.register("spruce", spruce);
-            reg.register("birch", birch);
-            reg.register("jungle", jungle);
-            reg.register("acacia", acacia);
-            reg.register("cherry", cherry);
-            reg.register("dark_oak", dark_oak);
-            reg.register("mangrove", mangrove);
-            reg.register("cedar", cedar);
-        });
-
-        event.register(RegistryAPI.TOTEM_CARVING_REGISTRY, reg -> {
-            reg.register("none", none);
-            reg.register("bat", bat);
-            reg.register("blaze", blaze);
-            reg.register("buffalo", buffalo);
-            reg.register("cow", cow);
-            reg.register("enderman", enderman);
-            reg.register("horse", horse);
-            reg.register("ocelot", ocelot);
-            reg.register("pig", pig);
-            reg.register("rabbit", rabbit);
-            reg.register("spider", spider);
-            reg.register("squid", squid);
-            reg.register("wolf", wolf);
-        });
-
-        event.register(RegistryAPI.CEREMONY_REGISTRY, reg -> {
-            reg.register("war_dance", war_dance);
-            reg.register("depths", depths);
-            reg.register("fertility", fertility);
-            reg.register("zaphkiel_waltz", zaphkiel_waltz);
-            reg.register("animal_growth", animal_growth);
-            reg.register("buffalo_dance", buffalo_dance);
-            reg.register("rain", rain);
-            reg.register("drought", drought);
-            reg.register("flute_infusion", flute_infusion);
-            reg.register("eagle_dance", eagle_dance);
-            reg.register("cleansing", cleansing);
-            reg.register("sun_dance", sun_dance);
-            reg.register("danse_macabre", danse_macabre);
-            reg.register("baykok_summon", baykok_summon);
-        });
-    }
+    public static final RegistryObject<Ceremony> war_dance = CEREMONIES.register("war_dance", () -> new Ceremony(4500, 20 * 20, () -> WarDanceCeremony.INSTANCE, drum, drum));
+    public static final RegistryObject<Ceremony> depths = CEREMONIES.register("depths", () -> new Ceremony(4500, 20 * 20, () -> DepthsCeremony.INSTANCE, flute, flute));
+    public static final RegistryObject<Ceremony> fertility = CEREMONIES.register("fertility", () -> new Ceremony(5280, 23 * 20, () -> FertilityCeremony.INSTANCE, flute, drum));
+    public static final RegistryObject<Ceremony> zaphkiel_waltz = CEREMONIES.register("zaphkiel_waltz", () -> new Ceremony(6720, 20 * 20, () -> ZaphkielWaltzCeremony.INSTANCE, wind_chime, flute));
+    public static final RegistryObject<Ceremony> animal_growth = CEREMONIES.register("animal_growth", () -> new Ceremony(6900, 21 * 20, () -> AnimalGrowthCeremony.INSTANCE, flute, wind_chime));
+    public static final RegistryObject<Ceremony> buffalo_dance = CEREMONIES.register("buffalo_dance", () -> new Ceremony(7380, 24 * 20, () -> BuffaloDanceCeremony.INSTANCE, drum, wind_chime));
+    public static final RegistryObject<Ceremony> rain = CEREMONIES.register("rain", () -> new Ceremony(10980, 26 * 20, () -> WeatherCeremony.RAIN, drum, rattle));
+    public static final RegistryObject<Ceremony> drought = CEREMONIES.register("drought", () -> new Ceremony(10980, 26 * 20, () -> WeatherCeremony.DROUGHT, rattle, drum));
+    public static final RegistryObject<Ceremony> flute_infusion = CEREMONIES.register("flute_infusion", () -> new Ceremony(11340, 28 * 20, () -> FluteInfusionCeremony.INSTANCE, flute, rattle));
+    public static final RegistryObject<Ceremony> eagle_dance = CEREMONIES.register("eagle_dance", () -> new Ceremony(11580, 25 * 20, () -> EagleDanceCeremony.INSTANCE, rattle, wind_chime));
+    public static final RegistryObject<Ceremony> cleansing = CEREMONIES.register("cleansing", () -> new Ceremony(14700, 30 * 20, () -> CleansingCeremony.INSTANCE, eagle_bone_whistle, flute));
+    public static final RegistryObject<Ceremony> sun_dance = CEREMONIES.register("sun_dance", () -> new Ceremony(14820, 31 * 20, () -> SunDanceCeremony.INSTANCE, drum, eagle_bone_whistle));
+    public static final RegistryObject<Ceremony> danse_macabre = CEREMONIES.register("danse_macabre", () -> new Ceremony(14940, 32 * 20, () -> DanseMacabreCeremony.INSTANCE, eagle_bone_whistle, wind_chime));
+    public static final RegistryObject<Ceremony> baykok_summon = CEREMONIES.register("baykok_summon", () -> new Ceremony(15060, 32 * 20, () -> BaykokSummonCeremony.INSTANCE, wind_chime, eagle_bone_whistle));
 }

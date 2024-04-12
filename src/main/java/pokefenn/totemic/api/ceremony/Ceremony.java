@@ -36,16 +36,33 @@ public final class Ceremony {
      * @param factory        a Supplier for a CeremonyInstance, which implements the actual effect of the ceremony.<br>
      *                       The Supplier will be invoked each time a Player performs the ceremony, or when a CeremonyInstance is to
      *                       be deserialized from NBT.
-     * @param selectors      the list of music instruments for selecting the ceremony.
+     * @param selector1      the first selecting instrument
+     * @param selector2      the second selecting instrument
      */
-    public Ceremony(int musicNeeded, int maxStartupTime, Supplier<CeremonyInstance> factory, MusicInstrument... selectors) {
-        Validate.inclusiveBetween(CeremonyAPI.MIN_SELECTORS, CeremonyAPI.MAX_SELECTORS, selectors.length,
-                "Invalid number of Cermeony selectors (must be between CeremonyAPI.MIN_SELECTORS and CeremonyAPI.MAX_SELECTORS)");
-
+    public Ceremony(int musicNeeded, int maxStartupTime, Supplier<CeremonyInstance> factory, MusicInstrument selector1, MusicInstrument selector2) {
         this.musicNeeded = musicNeeded;
         this.maxStartupTime = maxStartupTime;
         this.factory = factory;
-        this.selectors = List.of(selectors);
+        this.selectors = List.of(selector1, selector2);
+    }
+
+    /**
+     * Convenience form of {@link Ceremony#Ceremony(int, int, Supplier, MusicInstrument, MusicInstrument)}
+     * using Suppliers for the instruments, e.g. for use with DeferredRegister.
+     */
+    public Ceremony(int musicNeeded, int maxStartupTime, Supplier<CeremonyInstance> factory, Supplier<MusicInstrument> selector1, Supplier<MusicInstrument> selector2) {
+        this(musicNeeded, maxStartupTime, factory, selector1.get(), selector2.get());
+    }
+
+    /**
+     * Varargs form of {@link Ceremony#Ceremony(int, int, Supplier, MusicInstrument, MusicInstrument)}.
+     * Usually doesn't need to be used since at the moment Ceremonies must have exactly two selectors.
+     */
+    @Deprecated
+    public Ceremony(int musicNeeded, int maxStartupTime, Supplier<CeremonyInstance> factory, MusicInstrument... selectors) {
+        this(musicNeeded, maxStartupTime, factory, selectors[0], selectors[1]);
+        Validate.inclusiveBetween(CeremonyAPI.MIN_SELECTORS, CeremonyAPI.MAX_SELECTORS, selectors.length,
+                "Invalid number of Cermeony selectors (must be between CeremonyAPI.MIN_SELECTORS and CeremonyAPI.MAX_SELECTORS)");
     }
 
     /**

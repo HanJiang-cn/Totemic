@@ -18,7 +18,15 @@ public sealed class TotemCarving permits PortableTotemCarving {
     private @Nullable String descriptionId;
 
     /**
-     * Constructs a new TotemCarving.
+     * Constructs a new TotemCarving with one effect.
+     * @param effect the effect of the carving.
+     */
+    public TotemCarving(TotemEffect effect) {
+        this.effects = List.of(effect);
+    }
+
+    /**
+     * Constructs a new TotemCarving with multiple effects.
      * @param effects the constituent effects of the carving.
      */
     public TotemCarving(TotemEffect... effects) {
@@ -26,7 +34,7 @@ public sealed class TotemCarving permits PortableTotemCarving {
     }
 
     /**
-     * Constructs a new TotemCarving.
+     * Constructs a new TotemCarving multiple effects.
      * @param effects the constituent effects of the carving, as a List.
      */
     public TotemCarving(List<? extends TotemEffect> effects) {

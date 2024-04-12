@@ -1,12 +1,10 @@
 package pokefenn.totemic.client.model.totem;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
-import com.google.common.collect.ArrayTable;
-import com.google.common.collect.ImmutableTable;
-import com.google.common.collect.Table;
-import com.google.common.collect.Tables;
+import com.google.common.collect.Maps;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -29,15 +27,15 @@ import pokefenn.totemic.api.totem.TotemCarving;
 import pokefenn.totemic.api.totem.TotemWoodType;
 
 public final class TotemPoleModel implements IUnbakedGeometry<TotemPoleModel> {
-    private Table<TotemWoodType, TotemCarving, UnbakedModel> totemModels = null;
+    private Map<TotemPoleModelData, UnbakedModel> totemModels = null;
 
     private TotemPoleModel() {
     }
 
     @Override
     public BakedModel bake(IGeometryBakingContext ctx, ModelBaker bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
-        var bakedModels = Tables.transformValues(totemModels, unbaked -> unbaked.bake(bakery, spriteGetter, modelState, modelLocation));
-        return new BakedTotemPoleModel(ImmutableTable.copyOf(bakedModels));
+        var bakedModels = Map.copyOf(Maps.transformValues(totemModels, unbaked -> unbaked.bake(bakery, spriteGetter, modelState, modelLocation)));
+        return new BakedTotemPoleModel(bakedModels);
     }
 
     @Override
@@ -46,7 +44,7 @@ public final class TotemPoleModel implements IUnbakedGeometry<TotemPoleModel> {
             final var woodTypeRegistry = TotemicAPI.get().registry().woodTypes();
             final var carvingRegistry = TotemicAPI.get().registry().totemCarvings();
 
-            totemModels = ArrayTable.create(woodTypeRegistry, carvingRegistry);
+            totemModels = Maps.newHashMapWithExpectedSize(woodTypeRegistry.getValues().size() * carvingRegistry.getValues().size());
             for(var woodType: woodTypeRegistry) {
                 var woodTypeModel = (BlockModel) modelGetter.apply(getWoodTypeModelName(woodType));
                 if(woodTypeModel.getParentLocation() != null)
@@ -57,7 +55,7 @@ public final class TotemPoleModel implements IUnbakedGeometry<TotemPoleModel> {
                     //Create new BlockModel with the totem pole model as parent, but different textures
                     var model = new BlockModel(getPoleModelName(carving), List.of(), textureMap, ctx.useAmbientOcclusion(), null, ctx.getTransforms(), List.of());
                     model.name = ctx.getModelName() + "[" + woodType.getRegistryName() + ", " + carving.getRegistryName() + "]";
-                    totemModels.put(woodType, carving, model);
+                    totemModels.put(new TotemPoleModelData(woodType, carving), model);
                     model.resolveParents(modelGetter);
                 }
             }

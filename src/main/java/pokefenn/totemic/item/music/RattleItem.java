@@ -26,9 +26,9 @@ public class RattleItem extends Item {
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
         if(entity instanceof Player player && !player.getCooldowns().isOnCooldown(this)) {
             if(entity.isShiftKeyDown())
-                TotemicAPI.get().music().playSelector(entity, ModContent.rattle);
+                TotemicAPI.get().music().playSelector(entity, ModContent.rattle.get());
             else
-                TotemicAPI.get().music().playMusic(entity, ModContent.rattle);
+                TotemicAPI.get().music().playMusic(entity, ModContent.rattle.get());
 
             player.getCooldowns().addCooldown(this, 16);
             player.awardStat(Stats.ITEM_USED.get(this));

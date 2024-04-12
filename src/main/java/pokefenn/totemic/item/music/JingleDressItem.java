@@ -70,7 +70,7 @@ public class JingleDressItem extends ArmorItem {
             var charge = stack.getOrCreateTag().getByte(CHARGE_KEY);
             charge += Mth.clamp((int)(velocity * chargeFactor), 0, maxSingleCharge);
             if(charge >= chargeLimit) {
-                TotemicAPI.get().music().playMusic(player, ModContent.jingle_dress);
+                TotemicAPI.get().music().playMusic(player, ModContent.jingle_dress.get());
                 charge %= chargeLimit;
             }
             stack.getTag().putByte(CHARGE_KEY, charge);

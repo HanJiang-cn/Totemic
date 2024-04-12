@@ -64,7 +64,7 @@ public class MedicineBagItem extends Item {
                 Optional.ofNullable(st.getTag())
                 .filter(tag -> tag.contains(TOTEM_TAG, Tag.TAG_STRING))
                 .map(tag -> TotemicAPI.get().registry().totemCarvings().get(ResourceLocation.tryParse(tag.getString(TOTEM_TAG))))
-                .filter(carving -> carving != ModContent.none),
+                .filter(carving -> carving != ModContent.none.get()),
                 PortableTotemCarving.class));
     }
 
@@ -191,7 +191,7 @@ public class MedicineBagItem extends Item {
     @Override
     public Component getName(ItemStack stack) {
         return Component.translatable(getDescriptionId(),
-                getCarving(stack).orElse((PortableTotemCarving) ModContent.none).getDisplayName());
+                getCarving(stack).orElse((PortableTotemCarving) ModContent.none.get()).getDisplayName());
     }
 
     @Override
