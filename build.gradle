@@ -61,8 +61,8 @@ repositories {
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
     
-    //compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.2-77:api")
-    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.2-77")
+    compileOnly "vazkii.patchouli:Patchouli:1.20.4-85-NEOFORGE:api"
+    runtimeOnly "vazkii.patchouli:Patchouli:1.20.4-85-NEOFORGE"
 }
 
 tasks.withType(ProcessResources).configureEach {
