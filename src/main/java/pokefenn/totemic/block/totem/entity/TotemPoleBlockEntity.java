@@ -19,7 +19,6 @@ import pokefenn.totemic.Totemic;
 import pokefenn.totemic.api.TotemicAPI;
 import pokefenn.totemic.api.totem.TotemCarving;
 import pokefenn.totemic.api.totem.TotemWoodType;
-import pokefenn.totemic.client.model.totem.BakedTotemPoleModel;
 import pokefenn.totemic.client.model.totem.TotemPoleModelData;
 import pokefenn.totemic.init.ModBlockEntities;
 import pokefenn.totemic.init.ModContent;
@@ -81,6 +80,6 @@ public class TotemPoleBlockEntity extends BlockEntity {
 
     @Override
     public @NotNull ModelData getModelData() {
-        return ModelData.builder().with(BakedTotemPoleModel.DATA_PROPERTY, new TotemPoleModelData(woodType, carving)).build();
+        return ModelData.builder().with(TotemPoleModelData.DATA_PROPERTY, new TotemPoleModelData(woodType, carving)).build();
     }
 }
