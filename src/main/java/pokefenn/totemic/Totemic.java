@@ -71,6 +71,7 @@ public final class Totemic {
         modBus.register(ModItems.class);
         modBus.register(ModEntityTypes.class);
         modBus.register(RegistryApiImpl.class);
+        modBus.addListener(ModContent::registerCustomWoodTypes);
 
         if(FMLEnvironment.dist.isClient()) {
             modBus.addListener(this::clientSetup);

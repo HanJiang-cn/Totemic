@@ -2,11 +2,19 @@ package pokefenn.totemic.init;
 
 import java.util.List;
 
+import com.electronwill.nightconfig.core.Config;
+
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
+import pokefenn.totemic.ModConfig;
 import pokefenn.totemic.api.TotemicAPI;
 import pokefenn.totemic.api.TotemicBlockTags;
 import pokefenn.totemic.api.ceremony.Ceremony;
@@ -98,4 +106,29 @@ public final class ModContent {
     public static final RegistryObject<Ceremony> sun_dance = CEREMONIES.register("sun_dance", () -> new Ceremony(14820, 31 * 20, () -> SunDanceCeremony.INSTANCE, drum, eagle_bone_whistle));
     public static final RegistryObject<Ceremony> danse_macabre = CEREMONIES.register("danse_macabre", () -> new Ceremony(14940, 32 * 20, () -> DanseMacabreCeremony.INSTANCE, eagle_bone_whistle, wind_chime));
     public static final RegistryObject<Ceremony> baykok_summon = CEREMONIES.register("baykok_summon", () -> new Ceremony(15060, 32 * 20, () -> BaykokSummonCeremony.INSTANCE, wind_chime, eagle_bone_whistle));
+
+    public static void registerCustomWoodTypes(RegisterEvent event) {
+        event.register(RegistryAPI.WOOD_TYPE_REGISTRY, reg -> {
+            for(Config entry: ModConfig.COMMON.customTotemWoodTypes.get()) {
+                try {
+                    String keyStr = entry.get("key");
+                    int woodColorIndex = entry.getIntOrElse("woodColor", 0);
+                    int barkColorIndex = entry.getIntOrElse("barkColor", 0);
+                    String logTagStr = entry.get("logTag");
+
+                    var key = new ResourceLocation(keyStr);
+                    var woodColor = MaterialColor.byId(woodColorIndex);
+                    var barkColor = MaterialColor.byId(barkColorIndex);
+                    var logTagKey = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(logTagStr));
+                    if(!ForgeRegistries.BLOCKS.tags().isKnownTagName(logTagKey))
+                        throw new RuntimeException("Unknown block tag: '" + logTagStr + "'");
+
+                    reg.register(key, new TotemWoodType(woodColor, barkColor, logTagKey));
+                }
+                catch(Exception e) {
+                    throw new RuntimeException("Invalid custom Totem Wood Type, please check your 'totemic-common.toml' config file", e);
+                }
+            }
+        });
+    }
 }

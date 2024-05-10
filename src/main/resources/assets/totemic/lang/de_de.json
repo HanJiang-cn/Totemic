@@ -287,11 +287,12 @@
   "totemic.entry.totem_torch": "Totemfackel",
   "totemic.page.totem_torch0": "Die $(item)Totemfackel$() ist eine größere Variante einer normalen Fackel, und strahlt außerdem etwas mehr Licht aus.",
   
-  "totemic.config.general": "Allgemein",
+  "totemic.config.common": "Allgemein",
   "totemic.config.client": "Client-Seite",
   "totemic.config.server": "Server",
   "totemic.config.ceremonyHudPositionX": "Zeremonien-HUD X-Position",
   "totemic.config.ceremonyHudPositionY": "Zeremonien-HUD Y-Position",
   "totemic.config.disabledCeremonies": "Deaktivierte Zeremonien",
-  "totemic.config.disabledTotemCarvings": "Deaktivierte Totem-Schnitzmuster"
+  "totemic.config.disabledTotemCarvings": "Deaktivierte Totem-Schnitzmuster",
+  "totemic.config.customTotemWoodTypes": "Benutzerdefinierte Totempfahl-Holztypen"
 }

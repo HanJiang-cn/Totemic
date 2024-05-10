@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import com.electronwill.nightconfig.core.Config;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
@@ -13,6 +15,17 @@ import net.minecraftforge.registries.IForgeRegistry;
 import pokefenn.totemic.api.TotemicAPI;
 
 public final class ModConfig {
+    public static class Common {
+        public final ConfigValue<List<? extends Config>> customTotemWoodTypes;
+
+        Common(ForgeConfigSpec.Builder builder) {
+            customTotemWoodTypes = builder
+                    //.comment("")
+                    .translation("totemic.config.customTotemWoodTypes")
+                    .defineListAllowEmpty(List.of("customTotemWoodTypes"), List::of, o -> o instanceof Config);
+        }
+    }
+
     public static class Client {
         public final ConfigValue<Integer> ceremonyHudPositionX;
         public final ConfigValue<Integer> ceremonyHudPositionY;
@@ -76,13 +89,19 @@ public final class ModConfig {
         };
     }
 
+    public static final Common COMMON;
     public static final Client CLIENT;
     public static final Server SERVER;
 
+    private static final ForgeConfigSpec commonSpec;
     private static final ForgeConfigSpec clientSpec;
     private static final ForgeConfigSpec serverSpec;
 
     static {
+        var commonPair = new ForgeConfigSpec.Builder().configure(Common::new);
+        COMMON = commonPair.getLeft();
+        commonSpec = commonPair.getRight();
+
         var clientPair = new ForgeConfigSpec.Builder().configure(Client::new);
         CLIENT = clientPair.getLeft();
         clientSpec = clientPair.getRight();
@@ -93,6 +112,7 @@ public final class ModConfig {
     }
 
     public static void register(ModLoadingContext context) {
+        context.registerConfig(Type.COMMON, commonSpec);
         context.registerConfig(Type.CLIENT, clientSpec);
         context.registerConfig(Type.SERVER, serverSpec);
     }

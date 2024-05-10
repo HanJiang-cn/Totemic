@@ -282,7 +282,7 @@
   "totemic.entry.totem_torch": "Тотемний смолоскип",
   "totemic.page.totem_torch0": "$(item)Тотемний смолоскип$() — це збільшена версія звичайного смолоскипа, що випромінює трохи більше світла, ніж звичайний.",
 
-  "totemic.config.general": "Загальні",
+  "totemic.config.common": "Загальні",
   "totemic.config.client": "Клієнт",
   "totemic.config.ceremonyHudPositionX": "Позиція X церемоніального інтерфейсу",
   "totemic.config.ceremonyHudPositionY": "Позиція Y церемоніального інтерфейсу"

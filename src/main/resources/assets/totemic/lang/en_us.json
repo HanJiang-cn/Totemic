@@ -287,11 +287,12 @@
   "totemic.entry.totem_torch": "Totem Torch",
   "totemic.page.totem_torch0": "The $(item)Totem Torch$() is a larger version of a regular torch, emitting slightly more light than it.",
   
-  "totemic.config.general": "General",
+  "totemic.config.common": "Common",
   "totemic.config.client": "Client",
   "totemic.config.server": "Server",
   "totemic.config.ceremonyHudPositionX": "Ceremony HUD X position",
   "totemic.config.ceremonyHudPositionY": "Ceremony HUD Y position",
   "totemic.config.disabledCeremonies": "Disabled Ceremonies",
-  "totemic.config.disabledTotemCarvings": "Disabled Totem Carvings"
+  "totemic.config.disabledTotemCarvings": "Disabled Totem Carvings",
+  "totemic.config.customTotemWoodTypes": "Custom Totem Wood Types"
 }
