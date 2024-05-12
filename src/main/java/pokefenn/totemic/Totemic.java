@@ -80,7 +80,7 @@ public final class Totemic {
             modBus.register(ModModelLayers.class);
         }
 
-        ModConfig.register(ModLoadingContext.get());
+        TotemicConfig.register(ModLoadingContext.get());
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

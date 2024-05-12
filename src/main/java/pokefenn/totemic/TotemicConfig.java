@@ -14,7 +14,7 @@ import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.registries.IForgeRegistry;
 import pokefenn.totemic.api.TotemicAPI;
 
-public final class ModConfig {
+public final class TotemicConfig {
     public static class Common {
         public final ConfigValue<List<? extends Config>> customTotemWoodTypes;
 

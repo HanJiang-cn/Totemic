@@ -14,7 +14,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
-import pokefenn.totemic.ModConfig;
+import pokefenn.totemic.TotemicConfig;
 import pokefenn.totemic.api.TotemicAPI;
 import pokefenn.totemic.api.TotemicBlockTags;
 import pokefenn.totemic.api.ceremony.Ceremony;
@@ -109,7 +109,7 @@ public final class ModContent {
 
     public static void registerCustomWoodTypes(RegisterEvent event) {
         event.register(RegistryAPI.WOOD_TYPE_REGISTRY, reg -> {
-            for(Config entry: ModConfig.COMMON.customTotemWoodTypes.get()) {
+            for(Config entry: TotemicConfig.COMMON.customTotemWoodTypes.get()) {
                 try {
                     String keyStr = entry.get("key");
                     int woodColorIndex = entry.getIntOrElse("woodColor", 0);
