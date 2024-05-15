@@ -109,6 +109,7 @@ public final class ModContent {
 
     public static void registerCustomWoodTypes(RegisterEvent event) {
         event.register(RegistryAPI.WOOD_TYPE_REGISTRY, reg -> {
+            TotemicConfig.loadCommonConfigEarly();
             for(Config entry: TotemicConfig.COMMON.customTotemWoodTypes.get()) {
                 try {
                     String keyStr = entry.get("key");

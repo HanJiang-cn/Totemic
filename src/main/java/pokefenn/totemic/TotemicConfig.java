@@ -1,5 +1,6 @@
 package pokefenn.totemic;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -10,7 +11,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.config.ModConfig.Type;
+import net.minecraftforge.fml.config.ConfigTracker;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.IForgeRegistry;
 import pokefenn.totemic.api.TotemicAPI;
 
@@ -111,9 +114,25 @@ public final class TotemicConfig {
         serverSpec = serverPair.getRight();
     }
 
+    //Special case for the common config, we need to load it earlier since Forge usually loads the configs after the registry events
+    private static ModConfig commonModConfig;
+
     public static void register(ModLoadingContext context) {
-        context.registerConfig(Type.COMMON, commonSpec);
-        context.registerConfig(Type.CLIENT, clientSpec);
-        context.registerConfig(Type.SERVER, serverSpec);
+        context.registerConfig(ModConfig.Type.CLIENT, clientSpec);
+        context.registerConfig(ModConfig.Type.SERVER, serverSpec);
+
+        commonModConfig = new ModConfig(ModConfig.Type.COMMON, commonSpec, context.getActiveContainer());
+        context.getActiveContainer().addConfig(commonModConfig);
+    }
+
+    public static void loadCommonConfigEarly() {
+        try {
+            var openConfigMethod = ConfigTracker.class.getDeclaredMethod("openConfig", ModConfig.class, Path.class);
+            openConfigMethod.setAccessible(true);
+            openConfigMethod.invoke(ConfigTracker.INSTANCE, commonModConfig, FMLPaths.CONFIGDIR.get());
+        }
+        catch(Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
