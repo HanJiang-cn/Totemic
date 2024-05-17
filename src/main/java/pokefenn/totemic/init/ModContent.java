@@ -11,7 +11,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 import pokefenn.totemic.TotemicConfig;
@@ -121,8 +120,6 @@ public final class ModContent {
                     var woodColor = MaterialColor.byId(woodColorIndex);
                     var barkColor = MaterialColor.byId(barkColorIndex);
                     var logTagKey = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(logTagStr));
-                    if(!ForgeRegistries.BLOCKS.tags().isKnownTagName(logTagKey))
-                        throw new RuntimeException("Unknown block tag: '" + logTagStr + "'");
 
                     reg.register(key, new TotemWoodType(woodColor, barkColor, logTagKey));
                 }
