@@ -16,6 +16,6 @@
             "recipe": "totemic:wind_chime"
         }
     ],
-    "advancement": "totemic:recipes/totemic/wind_chime",
+    "advancement": "totemic:recipes/misc/wind_chime",
     "sortnum": 2
 }

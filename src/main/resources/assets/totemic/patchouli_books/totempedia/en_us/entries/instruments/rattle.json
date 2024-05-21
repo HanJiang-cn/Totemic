@@ -12,6 +12,6 @@
             "recipe": "totemic:rattle"
         }
     ],
-    "advancement": "totemic:recipes/totemic/rattle",
+    "advancement": "totemic:recipes/misc/rattle",
     "sortnum": 4
 }
