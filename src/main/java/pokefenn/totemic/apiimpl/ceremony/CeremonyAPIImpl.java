@@ -26,6 +26,8 @@ public enum CeremonyAPIImpl implements CeremonyAPI {
                 var chunk = level.getChunk(chunkX, chunkZ);
                 //iterate over the sections inside the chunk
                 for(int secY = startSec.getY(); secY <= endSec.getY(); secY++) {
+                    if(secY < chunk.getMinSection() || secY >= chunk.getMaxSection())
+                        continue;
                     var section = chunk.getSection(chunk.getSectionIndexFromSectionY(secY));
                     if(section.hasOnlyAir())
                         continue;
@@ -42,7 +44,7 @@ public enum CeremonyAPIImpl implements CeremonyAPI {
                         for(int z = secMinZ; z <= secMaxZ; z++)
                             for(int x = secMinX; x <= secMaxX; x++) {
                                 var pos = secPos.origin().offset(x, y, z);
-                                var state = section.getStates().get(x, y, z);
+                                var state = section.getBlockState(x, y, z);
                                 action.accept(pos, state);
                             }
                 }
