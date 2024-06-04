@@ -1,5 +1,4 @@
-- (@unroman) Added Ukranian translation
-- Certain particle effects are now always visible even when the graphics option is set to "Minimal"
-- Added particles visualizing the amount of Totem Effect Melody that a Totem Base has
-- Comparators can now sense the amount of Totem Effect Melody from Totem Bases
-- Fixed a bug where the Totem Effect Melody was not saved properly
+- Fixed a recurring crash that happens when the Zaphkiel Waltz or Hymn of Maturity ceremony is performed near the bedrock or the build height limit, for example in Superflat worlds
+
+API changes:
+- Fixed CeremonyAPI.forEachBlockIn causing an exception when the given BoundingBox extends past the build height limit (causing the abovementioned crash)
