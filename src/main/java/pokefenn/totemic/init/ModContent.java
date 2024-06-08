@@ -112,6 +112,9 @@ public final class ModContent {
         event.register(RegistryAPI.WOOD_TYPE_REGISTRY, reg -> {
             TotemicConfig.loadCommonConfigEarly();
             for(Config entry: TotemicConfig.COMMON.customTotemWoodTypes.get()) {
+                if(entry.isEmpty())
+                    continue; //ignore empty default value
+
                 String idStr = entry.get("id");
                 if(idStr == null)
                     throw new IllegalArgumentException("Invalid custom Totem Wood Type: Missing entry 'id'. Please check your 'totemic-common.toml' config file.");

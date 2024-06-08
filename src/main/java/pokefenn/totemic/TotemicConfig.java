@@ -2,10 +2,12 @@ package pokefenn.totemic;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import com.electronwill.nightconfig.core.Config;
+import com.electronwill.nightconfig.core.InMemoryFormat;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -22,6 +24,9 @@ public final class TotemicConfig {
         public final ConfigValue<List<? extends Config>> customTotemWoodTypes;
 
         Common(ForgeConfigSpec.Builder builder) {
+            //The default value will be a list containing an empty table, rather than an empty list, to make the TOML syntax for lists of tables clearer to users.
+            //The default TOML file will then contain "[[customTotemWoodTypes]]" rather than "customTotemWoodTypes = []".
+            var emptyConfig = Config.wrap(Map.of(), InMemoryFormat.defaultInstance());
             customTotemWoodTypes = builder
                     .comment("""
                             This config option allows you to add custom wood types for Totem Bases and Totem Poles.
@@ -38,7 +43,7 @@ public final class TotemicConfig {
                                 woodColor = 53
                                 barkColor = 54""")
                     .translation("totemic.config.customTotemWoodTypes")
-                    .defineListAllowEmpty(List.of("customTotemWoodTypes"), List::of, o -> o instanceof Config);
+                    .defineList(List.of("customTotemWoodTypes"), () -> List.of(emptyConfig), o -> o instanceof Config);
         }
     }
 
