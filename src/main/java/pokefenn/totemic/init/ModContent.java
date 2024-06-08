@@ -9,10 +9,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
+import pokefenn.totemic.Totemic;
 import pokefenn.totemic.TotemicConfig;
 import pokefenn.totemic.api.TotemicAPI;
 import pokefenn.totemic.api.TotemicBlockTags;
@@ -110,21 +112,28 @@ public final class ModContent {
         event.register(RegistryAPI.WOOD_TYPE_REGISTRY, reg -> {
             TotemicConfig.loadCommonConfigEarly();
             for(Config entry: TotemicConfig.COMMON.customTotemWoodTypes.get()) {
+                String idStr = entry.get("id");
+                if(idStr == null)
+                    throw new IllegalArgumentException("Invalid custom Totem Wood Type: Missing entry 'id'. Please check your 'totemic-common.toml' config file.");
                 try {
-                    String keyStr = entry.get("key");
-                    int woodColorIndex = entry.getIntOrElse("woodColor", 0);
-                    int barkColorIndex = entry.getIntOrElse("barkColor", 0);
-                    String logTagStr = entry.get("logTag");
+                    String logsStr = entry.get("logs");
+                    if(logsStr == null)
+                        throw new IllegalArgumentException("Missing entry 'logs'");
+                    if(!logsStr.startsWith("#"))
+                        throw new IllegalArgumentException("'logs' value must be a valid block tag key starting with '#'");
+                    int woodColorIndex = entry.getIntOrElse("woodColor", Blocks.OAK_LOG.defaultMaterialColor().id);
+                    int barkColorIndex = entry.getIntOrElse("barkColor", Blocks.OAK_WOOD.defaultMaterialColor().id);
 
-                    var key = new ResourceLocation(keyStr);
+                    var id = new ResourceLocation(idStr);
+                    var logTagKey = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(logsStr.substring(1)));
                     var woodColor = MaterialColor.byId(woodColorIndex);
                     var barkColor = MaterialColor.byId(barkColorIndex);
-                    var logTagKey = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(logTagStr));
 
-                    reg.register(key, new TotemWoodType(woodColor, barkColor, logTagKey));
+                    reg.register(id, new TotemWoodType(woodColor, barkColor, logTagKey));
+                    Totemic.logger.debug("Added custom Totem Wood Type with ID '" + id + "'");
                 }
                 catch(Exception e) {
-                    throw new RuntimeException("Invalid custom Totem Wood Type, please check your 'totemic-common.toml' config file", e);
+                    throw new IllegalArgumentException("Invalid custom Totem Wood Type with ID '" + idStr + "': Please check your 'totemic-common.toml' config file.\n" + e.getLocalizedMessage(), e);
                 }
             }
         });
