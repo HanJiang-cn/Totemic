@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 
 import com.electronwill.nightconfig.core.Config;
 import com.electronwill.nightconfig.core.InMemoryFormat;
+import com.electronwill.nightconfig.core.file.FileWatcher;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -148,6 +149,10 @@ public final class TotemicConfig {
             var openConfigMethod = ConfigTracker.class.getDeclaredMethod("openConfig", ModConfig.class, Path.class);
             openConfigMethod.setAccessible(true);
             openConfigMethod.invoke(ConfigTracker.INSTANCE, commonModConfig, FMLPaths.CONFIGDIR.get());
+
+            //Remove file watcher for our early loaded config to (hopefully) avoid a known race condition which leads to the config spuriously being reset to default
+            //See https://github.com/neoforged/NeoForge/issues/32
+            FileWatcher.defaultInstance().removeWatch(commonModConfig.getFullPath());
         }
         catch(Exception e) {
             throw new RuntimeException(e);
